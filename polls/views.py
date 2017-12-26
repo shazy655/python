@@ -4,8 +4,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.http import Http404
 from django.urls import reverse
-from polls.models import Question,Choice
-import pprint
+from polls.models import Question,Choice,Book
+from django.views.generic import TemplateView,ListView
+
+class AboutView(TemplateView):
+    template_name = "polls/about.html"
+
 
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -18,6 +22,7 @@ def index(request):
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/detail.html', {'question': question})
+
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

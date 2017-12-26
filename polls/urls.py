@@ -1,6 +1,10 @@
 from django.urls import path
 
 from . import views
+
+from polls.views import AboutView
+from polls.book import BookListView
+
 app_name = 'polls'
 
 urlpatterns = [
@@ -11,5 +15,7 @@ urlpatterns = [
     path('<int:question_id>/results/', views.results, name='results'),
     # ex: /polls/5/vote/
     path('<int:question_id>/vote/', views.vote, name='vote'),
+    path('about/', AboutView.as_view()),
+    path('books/', BookListView.as_view()),
 
 ]
